@@ -11,10 +11,10 @@ tk.title("Boucing Ball")
 canvas.pack()
 
 class Ball:
-    def __init__(self):
-        self.shape = canvas.create_oval(10, 10, 60, 60, fill="orange")
-        self.xspeed = 4
-        self.yspeed = 5
+    def __init__(self, color, size):
+        self.shape = canvas.create_oval(10, 10, size, size, fill=color)
+        self.xspeed = random.randrange(-10,10)
+        self.yspeed = random.randrange(-10,10)
 
     def move(self):
         canvas.move(self.shape, self.xspeed, self.yspeed)
@@ -23,10 +23,14 @@ class Ball:
             self.yspeed = -self.yspeed
         if pos[2] >= WIDTH or pos[0] <= 0:
             self.xspeed = -self.xspeed
-newball = Ball()
+colors = ['red', 'green', 'blue', 'orange', 'yellow', 'cyan', 'magenta','grey','gold','pink']
 
+balls = []
+for i in range(100):
+    balls.append(Ball(random.choice(colors), random.randrange(50, 100)))
 while True:
-    newball.move()
+    for ball in balls:
+        ball.move()
     tk.update()
     time.sleep(0.01)
     
